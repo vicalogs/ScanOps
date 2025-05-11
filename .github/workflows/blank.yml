@@ -1,0 +1,24 @@
+name: ThinkPHP Deployment Workflow
+
+on:
+  push:
+    branches:
+      - master # 当 master 分支有新提交时触发
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: 检出代码
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: 创建私钥临时文件（解决 SSH 私钥直接使用的问题） 
+      - name: Create private key file
+        run: echo "${{ secrets.SSH_PRIVATE_KEY }}" > /tmp/private_key && chmod 600 /tmp/private_key
+      # Step 3: 解压并部署文件到服务器
+      - name: deploy on server
+        run: |
+          ssh -i /tmp/private_key -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no \
+          ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "mkdir ./test"
