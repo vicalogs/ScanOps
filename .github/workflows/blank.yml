@@ -20,5 +20,6 @@ jobs:
       # Step 3: 解压并部署文件到服务器
       - name: deploy on server
         run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" ${{ secrets.SSH_PORT }}
           ssh -i /tmp/private_key -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no \
           ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "mkdir ./test"
