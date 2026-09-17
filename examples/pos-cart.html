@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ScanOps POS 购物车示例</title></head>
+<body><h1>扫码加入购物车</h1><video id="camera" muted playsinline style="width:100%;max-width:720px"></video>
+<div><button id="start" type="button">开启摄像头</button><button id="stop" type="button">停止</button><button id="clear" type="button">清空购物车</button></div>
+<p id="status" aria-live="polite"></p>
+<ul id="cart"></ul>
+<p id="total"></p>
+<script type="module" src="./pos-cart.ts"></script></body></html>
